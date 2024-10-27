@@ -1,5 +1,9 @@
 import { NextFunction } from 'express';
-import mongoose from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
+ 
 interface IFavouriteCourse{
     course:mongoose.Schema.Types.ObjectId;
     poster:string;
@@ -12,12 +16,15 @@ interface IUser extends Document {
     role: "user" | "admin";
     FavouriteCourse:IFavouriteCourse[];
     createdAt:Date;
-    resetPasswordToken:string;
-
+    getJWTToken:()=>string;
+    resetPasswordToken: string;
+    resetPasswordExpire: Date;
+    comparePassword:(password:string)=>Promise<boolean>;
+    getResetToken: () => string;
     
 
 }
-  const schema=new mongoose.Schema({
+  const schema=new mongoose.Schema<IUser>({
     name:{
         type:String,
         required:true,
@@ -63,15 +70,38 @@ interface IUser extends Document {
          default:Date.now,
      },
        resetPasswordToken:String,
-       resetPasswordExpire:String,
+       resetPasswordExpire: Date,
 
   },{
       timestamps:true,
   })
-  schema.pre("save", async function (next:NextFunction) {
+  schema.pre<IUser>('save', async function (next:NextFunction) {
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
   });
+  schema.methods.getJWTToken = function () {
+    return jwt.sign({ _id: this._id }, "process.env.JWT_SECRET" as string, {
+      expiresIn: "15d",
+    });
+  };
+  
+  schema.methods.comparePassword = async function (password:string):Promise<boolean> {
+    return await bcrypt.compare(password, this.password);
+  };
+  schema.methods.getResetToken = function ():string {
+    const resetToken = crypto.randomBytes(20).toString("hex");
+  
+    this.resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+  
+    this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+  
+    return resetToken;
+  };
+  
+  
 
-    export const User=mongoose.model("User",schema)
+    export const User=mongoose.model<IUser>("User",schema)
