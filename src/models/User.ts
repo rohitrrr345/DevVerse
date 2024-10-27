@@ -67,3 +67,4 @@ interface IUser extends Document {
   },{
       timestamps:true,
   })
+  export const User=mongoose.model("User",schema)
