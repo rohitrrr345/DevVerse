@@ -34,7 +34,6 @@ app.use(morgan('dev'))
     });
   });
 
-  app.use(errorMiddleware);
   
   
   app.listen(port, () => console.log('Server is working on Port:'+port+' in '+envMode+' Mode.'));
