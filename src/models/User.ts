@@ -1,4 +1,21 @@
 import mongoose from 'mongoose';
+interface IFavouriteCourse{
+    course:mongoose.Schema.Types.ObjectId;
+    poster:string;
+}
+interface IUser extends Document {
+    name:string;
+    email:string;
+    password:string;
+    avatar:string;
+    role: "user" | "admin";
+    FavouriteCourse:IFavouriteCourse[];
+    createdAt:Date;
+    resetPasswordToken:string;
+
+    
+
+}
   const schema=new mongoose.Schema({
     name:{
         type:String,
