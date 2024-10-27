@@ -1,3 +1,4 @@
+import { NextFunction } from 'express';
 import mongoose from 'mongoose';
 interface IFavouriteCourse{
     course:mongoose.Schema.Types.ObjectId;
@@ -67,4 +68,10 @@ interface IUser extends Document {
   },{
       timestamps:true,
   })
-  export const User=mongoose.model("User",schema)
+  schema.pre("save", async function (next:NextFunction) {
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+  });
+
+    export const User=mongoose.model("User",schema)
