@@ -21,6 +21,7 @@ import { connectDB } from './utils/Features.js'
 app.use(express.urlencoded({extended: true}));
 app.use(cors({origin:' * ',credentials:true}));
 app.use(morgan('dev')) 
+
 app.use("/api/v1/user",user)
 
 
@@ -39,5 +40,5 @@ app.use("/api/v1/user",user)
   });
 
   
-  
+  // app.use(errorMiddleware);
   app.listen(port, () => console.log('Server is working on Port:'+port+' in '+envMode+' Mode.'));

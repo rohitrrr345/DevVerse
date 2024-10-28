@@ -8,7 +8,7 @@ import { sendToken } from "../utils/Features.js";
 export const register=TryCatch(async(req:Request<{},{},NewUserRequestBody>,res:Response,next:NextFunction)=>{
     const {name,email,password}=req.body;
     if(!name || !email || !password){
-       return next(new ErrorHandler(400,"Please add all the feilds"))
+       return next(new ErrorHandler(400,"Please add all the feilds"));
     }
     const photo=req.file as Express.Multer.File[] | undefined;
     //clodinary upload
