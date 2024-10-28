@@ -10,4 +10,5 @@ export type ControllerType = (
     req: Request,
     res: Response,
     next: NextFunction
-  ) => Promise<void>;
+  ) => Promise<void  >;
+  
