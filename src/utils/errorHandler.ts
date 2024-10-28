@@ -1,6 +1,8 @@
-export default class ErrorHandler extends Error {
-  constructor(public statusCode: number,public message: string) {
+class ErrorHandler extends Error {
+  constructor(public message: string, public statusCode: number) {
     super(message);
     this.statusCode = statusCode;
   }
 }
+
+export default ErrorHandler;
