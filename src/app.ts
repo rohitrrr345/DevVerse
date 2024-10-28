@@ -3,6 +3,8 @@ import cors from 'cors'
 import {errorMiddleware} from './middlewares/error.js'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import user from "./routes/user.js"
+import { connectDB } from './utils/Features.js'
 
 
   dotenv.config({path: './.env',});
@@ -12,12 +14,14 @@ import dotenv from 'dotenv'
 
 
   const app = express();
+  connectDB(process.env.MONGO_URI as string)
 
 
  app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({origin:' * ',credentials:true}));
 app.use(morgan('dev')) 
+app.use("/api/v1/user",user)
 
 
   app.get('/', (req, res) => {

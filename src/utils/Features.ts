@@ -1,4 +1,5 @@
 import { Response } from "express";
+import mongoose from "mongoose";
 
 interface User {
   getJWTToken: () => string;
@@ -19,3 +20,12 @@ export const sendToken = (res: Response, user: User, message: string, statusCode
     user,
   });
 };
+export const connectDB = (uri: string) => {
+    mongoose
+      .connect(uri, {
+        dbName: "DevVerse",
+      })
+      .then((c) => console.log(`DB Connected to ${c.connection.host}`))
+      .catch((e) => console.log(e));
+  };
+  

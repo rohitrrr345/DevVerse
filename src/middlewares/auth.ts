@@ -14,10 +14,11 @@ export const isAuthenticated = TryCatch(async (req: AuthenticatedRequest, res: R
 
   if (!token) return next(new ErrorHandler(401, "Not Logged In"));
 
-  // Use process.env.JWT_SECRET, and define decoded type
   const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
 
-  req.user = await User.findById(decoded._id);
+  // Fetch the user and handle the possibility of null
+  const user = await User.findById(decoded._id);
+  if (!user) return next(new ErrorHandler(401, "User not found")); // Handle case where user doesn't exist
 
-  next();
+  req.user = user; // Now this is guaranteed to be an IUser instance  next();
 });
