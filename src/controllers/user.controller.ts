@@ -4,7 +4,8 @@ import { ControllerType, NewUserRequestBody } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { IUser, User } from "../models/User.js";
 import { sendToken } from "../utils/Features.js";
-
+import getDataUri from "../utils/getDataUri.js";
+import cloudinary from 'cloudinary'
 interface AuthenticatedRequest extends Request {
   user?: IUser;
 }
@@ -117,14 +118,18 @@ export const UpdateProfile:ControllerType =TryCatch(async(req:AuthenticatedReque
     })
  });
  export const updateprofilepicture:ControllerType =TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
-  const file = req.file;
+  const file = req.file || undefined;
   if (!req.user) {
     return next(new ErrorHandler( "User not found",401));
   }
-
+  if (!req.file) {
+    return next(new ErrorHandler( "File not found",401));
+  }
 
   const user = await User.findById(req.user._id);
-
+if(!user){
+  return next(new ErrorHandler("User not found",401))
+}
   const fileUri = getDataUri(file);
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
