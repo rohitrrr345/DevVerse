@@ -55,15 +55,121 @@ export const logout:ControllerType = TryCatch(async (req: Request, res: Response
       message: "Logged Out Successfully",
     });
 });
-export const MyProfile=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+export const MyProfile:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
   const user =await User.findById(req.user._id);
   res.status(200).json({
     success:true,
     user,
   })
 });
-export const changePassword =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
-  const user =await User.findById(req.user._id);
- 
-});
+export const changePassword:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+ const{oldPassword,newPassword}=req.body;
+ if (!oldPassword || !newPassword)
+  return next(new ErrorHandler("Please enter all field", 400));
 
+const user = await User.findById(req.user._id).select("+password");
+
+const isMatch = await user.comparePassword(oldPassword);
+
+if (!isMatch) return next(new ErrorHandler("Incorrect Old Password", 400));
+
+user.password = newPassword;
+
+await user.save();
+
+res.status(200).json({
+  success: true,
+  message: "Password Changed Successfully",
+});
+});
+export const UpdateProfile:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const { name, email } = req.body;
+  
+    const user = await User.findById(req.user._id);
+  
+    if (name) user.name = name;
+    if (email) user.email = email;
+  
+    await user.save();
+  
+    res.status(200).json({
+      success: true,
+      message: "Profile Updated Successfully",
+    })
+ });
+ export const updateprofilepicture:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const file = req.file;
+  
+  const user = await User.findById(req.user._id);
+
+  const fileUri = getDataUri(file);
+  const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
+  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
+  user.avatar = {
+    public_id: mycloud.public_id,
+    url: mycloud.secure_url,
+  };
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Profile Picture Updated Successfully",
+  });
+ });
+ export const addToPlaylist:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const user = await User.findById(req.user._id);
+  
+    const course = await Course.findById(req.body.id);
+  
+    if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
+  
+    const itemExist = user.playlist.find((item) => {
+      if (item.course.toString() === course._id.toString()) return true;
+    });
+  
+    if (itemExist) return next(new ErrorHandler("Item Already Exist", 409));
+  
+    user.playlist.push({
+      course: course._id,
+      poster: course.poster.url,
+    });
+  
+    await user.save();
+  
+    res.status(200).json({
+      success: true,
+      message: "Added to playlist",
+    });
+ })
+ export const removeFromPlaylist:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const user = await User.findById(req.user._id);
+  const course = await Course.findById(req.query.id);
+  if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
+
+  const newPlaylist = user.playlist.filter((item) => {
+    if (item.course.toString() !== course._id.toString()) return item;
+  });
+
+  user.playlist = newPlaylist;
+  await user.save();
+  res.status(200).json({
+    success: true,
+    message: "Removed From Playlist",
+  });
+});
+export const getAllUsers = catchAsyncError(async (req, res, next) => {
+  const users = await User.find({});
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+
+ })
+
+
+
+ 
