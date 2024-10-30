@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { User, IUser } from "../models/User.js"; // Make sure User is correctly imported
-import ErrorHandler from "../utils/errorHandler.js"; // Make sure this is imported as well
+import { User, IUser } from "../models/User.js"; 
+import ErrorHandler from "../utils/errorHandler.js"; 
 import { TryCatch } from './error.js';
 
-// Extend Express Request type to include `user`
 interface AuthenticatedRequest extends Request {
-  user?: IUser; // Use IUser type here for better clarity
+  user?: IUser; 
 }
 
 export const isAuthenticated = TryCatch(async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -14,13 +13,11 @@ export const isAuthenticated = TryCatch(async (req: AuthenticatedRequest, res: R
 
   if (!token) return next(new ErrorHandler( "Not Logged In",401));
 
-  // Decode the token and define the type of decoded
   const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
 
-  // Fetch the user and handle the possibility of null
-  const user = await User.findById(decoded._id).exec(); // Use exec() to return a Promise
-  if (!user) return next(new ErrorHandler("User not found",401)); // Handle case where user doesn't exist
+  const user = await User.findById(decoded._id).exec(); 
+  if (!user) return next(new ErrorHandler("User not found",401)); 
 
-  req.user = user; // Now this is guaranteed to be an IUser instance
+  req.user = user; 
   next();
 });
