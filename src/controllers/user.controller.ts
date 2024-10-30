@@ -2,8 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { TryCatch } from "../middlewares/error.js";
 import { ControllerType, NewUserRequestBody } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { User } from "../models/User.js";
+import { IUser, User } from "../models/User.js";
 import { sendToken } from "../utils/Features.js";
+
+interface AuthenticatedRequest extends Request {
+  user?: IUser;
+}
+
 
 export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewUserRequestBody>, res: Response, next: NextFunction) => {
     const { name, email, password } = req.body;
@@ -55,24 +60,32 @@ export const logout:ControllerType = TryCatch(async (req: Request, res: Response
       message: "Logged Out Successfully",
     });
 });
-export const MyProfile:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+export const MyProfile:ControllerType=TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
+  if (!req.user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
   const user =await User.findById(req.user._id);
   res.status(200).json({
     success:true,
     user,
   })
 });
-export const changePassword:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+export const changePassword:ControllerType =TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
  const{oldPassword,newPassword}=req.body;
  if (!oldPassword || !newPassword)
   return next(new ErrorHandler("Please enter all field", 400));
-
+ if (!req.user) {
+  return next(new ErrorHandler( "User not found",401));
+}
 const user = await User.findById(req.user._id).select("+password");
 
-const isMatch = await user.comparePassword(oldPassword);
+const isMatch = await user?.comparePassword(oldPassword);
 
 if (!isMatch) return next(new ErrorHandler("Incorrect Old Password", 400));
+if(!user){
+  return next(new ErrorHandler( "User not found",401));
 
+}
 user.password = newPassword;
 
 await user.save();
@@ -82,10 +95,16 @@ res.status(200).json({
   message: "Password Changed Successfully",
 });
 });
-export const UpdateProfile:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+export const UpdateProfile:ControllerType =TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
   const { name, email } = req.body;
-  
+  if (!req.user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
     const user = await User.findById(req.user._id);
+    if (!user) {
+      return next(new ErrorHandler( "User not found",401));
+    }
   
     if (name) user.name = name;
     if (email) user.email = email;
@@ -97,9 +116,13 @@ export const UpdateProfile:ControllerType =TryCatch(async(req:Request,res:Respon
       message: "Profile Updated Successfully",
     })
  });
- export const updateprofilepicture:ControllerType =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+ export const updateprofilepicture:ControllerType =TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
   const file = req.file;
-  
+  if (!req.user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
+
   const user = await User.findById(req.user._id);
 
   const fileUri = getDataUri(file);
@@ -160,15 +183,6 @@ export const UpdateProfile:ControllerType =TryCatch(async(req:Request,res:Respon
     message: "Removed From Playlist",
   });
 });
-export const getAllUsers = catchAsyncError(async (req, res, next) => {
-  const users = await User.find({});
-
-  res.status(200).json({
-    success: true,
-    users,
-  });
-
- })
 
 
 
