@@ -5,9 +5,13 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { IUser, User } from "../models/User.js";
 import { sendToken } from "../utils/Features.js";
 import getDataUri from "../utils/getDataUri.js";
+import { Express } from "express"
+
 import cloudinary from 'cloudinary'
+import { Course } from "../models/Course.js";
 interface AuthenticatedRequest extends Request {
   user?: IUser;
+  file?: Express.Multer.File;
 }
 
 
@@ -118,11 +122,11 @@ export const UpdateProfile:ControllerType =TryCatch(async(req:AuthenticatedReque
     })
  });
  export const updateprofilepicture:ControllerType =TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
-  const file = req.file || undefined;
+  const file = req.file ;
   if (!req.user) {
     return next(new ErrorHandler( "User not found",401));
   }
-  if (!req.file) {
+  if (!file) {
     return next(new ErrorHandler( "File not found",401));
   }
 
@@ -147,23 +151,31 @@ if(!user){
     message: "Profile Picture Updated Successfully",
   });
  });
- export const addToPlaylist:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+ export const addToPlaylist:ControllerType=TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
+  if (!req.user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
   const user = await User.findById(req.user._id);
-  
+  if (!user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
+
     const course = await Course.findById(req.body.id);
   
     if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
   
-    const itemExist = user.playlist.find((item) => {
+    const itemExist = user.FavouriteCourse.find((item) => {
       if (item.course.toString() === course._id.toString()) return true;
     });
   
     if (itemExist) return next(new ErrorHandler("Item Already Exist", 409));
   
-    user.playlist.push({
-      course: course._id,
-      poster: course.poster.url,
-    });
+    // user.FavouriteCourse.push({
+    //   course: course._id,
+    //   poster: course.poster.url,
+    // });
   
     await user.save();
   
@@ -172,16 +184,24 @@ if(!user){
       message: "Added to playlist",
     });
  })
- export const removeFromPlaylist:ControllerType=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+ export const removeFromPlaylist:ControllerType=TryCatch(async(req:AuthenticatedRequest,res:Response,next:NextFunction)=>{
+  if (!req.user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
   const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(new ErrorHandler( "User not found",401));
+  }
+
   const course = await Course.findById(req.query.id);
   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
 
-  const newPlaylist = user.playlist.filter((item) => {
+  const newPlaylist = user.FavouriteCourse.filter((item) => {
     if (item.course.toString() !== course._id.toString()) return item;
   });
 
-  user.playlist = newPlaylist;
+  user.FavouriteCourse = newPlaylist;
   await user.save();
   res.status(200).json({
     success: true,
