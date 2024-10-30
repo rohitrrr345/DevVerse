@@ -55,3 +55,15 @@ export const logout:ControllerType = TryCatch(async (req: Request, res: Response
       message: "Logged Out Successfully",
     });
 });
+export const MyProfile=TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const user =await User.findById(req.user._id);
+  res.status(200).json({
+    success:true,
+    user,
+  })
+});
+export const changePassword =TryCatch(async(req:Request,res:Response,next:NextFunction)=>{
+  const user =await User.findById(req.user._id);
+ 
+});
+
