@@ -39,10 +39,6 @@ const schema = new mongoose.Schema(
         },
       },
     ],
-    numberOfDocuments: {
-      type: Number,
-      default: 0,
-    },
 
     NumberOfDownloads: {
       type: Number,
