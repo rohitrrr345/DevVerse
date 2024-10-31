@@ -16,6 +16,7 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
       if (!name || !email || !password ) {
         return next(new ErrorHandler("Please add all the fields",400));
     }
+    
 
     await User.create({
         name,
@@ -27,6 +28,6 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
 
     res.status(201).json({
         success: true,
-        message: "User registered successfully"
+        message: "course created successfully"
     });
 });
