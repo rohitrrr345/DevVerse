@@ -16,6 +16,17 @@ const schema = new mongoose.Schema(
         type: String,
         required: [true, "author is required"],
       },
+      poster: {
+        public_id: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+      },
+    
 
     pdfs: [
       {

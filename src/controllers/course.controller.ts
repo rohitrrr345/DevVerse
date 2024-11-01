@@ -8,26 +8,29 @@ import getDataUri from "../utils/getDataUri.js";
 import { Express } from "express"
 
 import cloudinary from 'cloudinary'
+import { Course } from "../models/Course.js";
 
 
 export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
-    const { name, email, password } = req.body;
-    // const avatar = req.file as Express.Multer.File | undefined;  
-      if (!name || !email || !password ) {
-        return next(new ErrorHandler("Please add all the fields",400));
-    }
-    
+   const {title,description,author,category}=req.body;
+  if (!title || !description || !author|| !category){
+       return next(new ErrorHandler( "Please Fill all the details",401));    
+   }
+   
+    const course=Course.create({
+        title,
+        description,
+        author,
+        category,
 
-    await User.create({
-        name,
-        email,
-        password,
-        avatar:"jakgjsfjknkjzgsjv",
-        path:"kjsgbvzekvk"
-    });
-
+    })  
     res.status(201).json({
         success: true,
-        message: "course created successfully"
-    });
+        message: "Course Created Successfully. You can add lectures now.",
+      }); 
+      
+
+    
+
+   
 });
