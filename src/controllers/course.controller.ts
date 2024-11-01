@@ -92,21 +92,21 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
  export const getPdfDocuments:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
    const course=await Course.findById(req.params.id);
    if (!course) return next(new ErrorHandler("Course not found", 404));
-     course.
      await course.save();
      res.status(200).json({
         success: true,
         message: "Lecture added in Course",
       });   
  });
- export const getPdfDocuments:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+ export const downloadingDocs:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
     const course=await Course.findById(req.params.id);
     if (!course) return next(new ErrorHandler("Course not found", 404));
-      course.
+      course.NumberOfDownloads+=1;
       await course.save();
       res.status(200).json({
          success: true,
-         message: "Lecture added in Course",
+         course,
+         message: "Downloading  will start soon ",
        });   
   });
  
