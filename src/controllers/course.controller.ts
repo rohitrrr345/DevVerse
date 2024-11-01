@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { TryCatch } from "../middlewares/error.js";
-import { ControllerType, NewUserRequestBody } from "../types/UserTypes.js";
+import { ControllerType, courseBody, SearchQuery } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { IUser, User } from "../models/User.js";
 import { sendToken } from "../utils/Features.js";
@@ -11,7 +11,7 @@ import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
 
   
-export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+export const CreateCourse:ControllerType = TryCatch(async (req: Request<{}, {}, courseBody>, res: Response, next: NextFunction) => {
    const {title,description,author,category}=req.body;
   if (!title || !description || !author|| !category){
        return next(new ErrorHandler( "Please Fill all the details",401));    
@@ -26,7 +26,7 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
     })  
     res.status(201).json({
         success: true,
-        message: "Course Created Successfully. You can add lectures now.",
+        message: "Course Created Successfully. You can add pdfs now.",
       }); 
       
 
@@ -34,7 +34,7 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
 
    
 });
-export const getallCourses:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+export const getallCourses:ControllerType = TryCatch(async (req:Request<{}, {}, SearchQuery>, res: Response, next: NextFunction) => {
    const keyword=req.query.keyword || "";
    const category=req.query.category || "";
    const courses=await Course.find({
@@ -95,6 +95,7 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
      await course.save();
      res.status(200).json({
         success: true,
+        course,
         message: "Lecture added in Course",
       });   
  });
