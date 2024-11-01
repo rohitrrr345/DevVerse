@@ -34,3 +34,39 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
 
    
 });
+export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+    const {id}=req.params;
+    const {title,description}=req.body;
+    const course=await Course.findById(id);
+    if(!course)  return next(new ErrorHandler("Course Not found",404));
+    // const file=req.file;
+    // const fileUri=getDataUri(file);
+    // const mycloud =await cloudinary.v2.uploader.upload(fileUri.content,{
+    //     resource_type:"pdf",
+    // })
+     course.pdfs.push({
+        title,
+        description,
+        // documentArray:{
+        //     public_id:mycloud.public_id,
+        //     url:mycloud.secure_url,
+
+        // }
+
+     })
+     await course.save();
+     res.status(200).json({
+        success: true,
+        message: "Lecture added in Course",
+      });
+  
+     
+
+  
+       
+ 
+     
+ 
+    
+ });
+ 
