@@ -87,16 +87,29 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
      res.status(200).json({
         success: true,
         message: "Lecture added in Course",
-      });
-      
-  
-     
-
-  
-       
- 
-     
- 
-    
+      });   
  });
+ export const getPdfDocuments:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+   const course=await Course.findById(req.params.id);
+   if (!course) return next(new ErrorHandler("Course not found", 404));
+     course.
+     await course.save();
+     res.status(200).json({
+        success: true,
+        message: "Lecture added in Course",
+      });   
+ });
+ export const getPdfDocuments:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+    const course=await Course.findById(req.params.id);
+    if (!course) return next(new ErrorHandler("Course not found", 404));
+      course.
+      await course.save();
+      res.status(200).json({
+         success: true,
+         message: "Lecture added in Course",
+       });   
+  });
+ 
+
+ 
  
