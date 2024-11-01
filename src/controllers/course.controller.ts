@@ -10,7 +10,7 @@ import { Express } from "express"
 import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
 
-
+  
 export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
    const {title,description,author,category}=req.body;
   if (!title || !description || !author|| !category){
@@ -34,6 +34,35 @@ export const CreateCourse:ControllerType = TryCatch(async (req:Request, res: Res
 
    
 });
+export const getallCourses:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
+   const keyword=req.query.keyword || "";
+   const category=req.query.category || "";
+   const courses=await Course.find({
+    title:{
+        $regex:keyword,
+        $options:"i",
+    },
+    category:{
+        $regex:category,
+        $options:"i",
+    }
+
+   }).select("-pdfs");
+
+
+     res.status(201).json({
+         success: true,
+         message: courses,
+       }); 
+       
+ 
+     
+ 
+    
+ });
+ 
+
+
 export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
     const {id}=req.params;
     const {title,description}=req.body;
@@ -59,6 +88,7 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
         success: true,
         message: "Lecture added in Course",
       });
+      
   
      
 
