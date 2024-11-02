@@ -34,7 +34,7 @@ export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewU
         name,
         email,
         password,
-        avatar:{
+        file:{
             public_id:mycloud.public_id,
             url:mycloud.secure_url,
         }
