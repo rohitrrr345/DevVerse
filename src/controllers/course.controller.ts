@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { TryCatch } from "../middlewares/error.js";
 import { ControllerType, courseBody, SearchQuery } from "../types/UserTypes.js";
+import { CreateCourseResponse } from "../types/course.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import getDataUri from "../utils/getDataUri.js";
 import { io } from "../app.js";
@@ -8,7 +9,7 @@ import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
 
   
-export const CreateCourse:ControllerType = TryCatch(async (req: Request<{}, {}, courseBody>, res: Response, next: NextFunction) => {
+export const CreateCourse:ControllerType = TryCatch(async (req: Request<{}, {}, courseBody>, res: Response<CreateCourseResponse>, next: NextFunction) => {
    const {title,description,author,category}=req.body;
    const file = req.file as Express.Multer.File | undefined;  
 
