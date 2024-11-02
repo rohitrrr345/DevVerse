@@ -68,19 +68,21 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
     const {title,description}=req.body;
     const course=await Course.findById(id);
     if(!course)  return next(new ErrorHandler("Course Not found",404));
-    // const file=req.file;
-    // const fileUri=getDataUri(file);
-    // const mycloud =await cloudinary.v2.uploader.upload(fileUri.content,{
-    //     resource_type:"pdf",
-    // })
+    const file=req.file;
+    if(!file) return next(new ErrorHandler("File Not found",404));
+
+    const fileUri=getDataUri(file);
+    const mycloud =await cloudinary.v2.uploader.upload(fileUri.content,{
+        resource_type:"raw",
+    })
      course.pdfs.push({
         title,
         description,
-        // documentArray:{
-        //     public_id:mycloud.public_id,
-        //     url:mycloud.secure_url,
+        documentArray:{
+            public_id:mycloud.public_id,
+            url:mycloud.secure_url,
 
-        // }
+        }
 
      })
      await course.save();
