@@ -13,15 +13,25 @@ import { Course } from "../models/Course.js";
   
 export const CreateCourse:ControllerType = TryCatch(async (req: Request<{}, {}, courseBody>, res: Response, next: NextFunction) => {
    const {title,description,author,category}=req.body;
-  if (!title || !description || !author|| !category){
+   const file = req.file as Express.Multer.File | undefined;  
+
+  if (!title || !description || !author|| !category || !file){
        return next(new ErrorHandler( "Please Fill all the details",401));    
    }
-   
+   const fileUri = getDataUri(file);
+   console.log("this below multer" );
+ 
+   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+ 
     const course=Course.create({
         title,
         description,
         author,
         category,
+        file:{
+          public_id:mycloud.public_id,
+          url:mycloud.secure_url,
+      }
 
     })  
     res.status(201).json({

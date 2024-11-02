@@ -4,6 +4,8 @@ import {errorMiddleware} from './middlewares/error.js'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import user from "./routes/user.js"
+import course from "./routes/course.js"
+
 import { connectDB } from './utils/Features.js'
 import cloudinary from 'cloudinary'
 
@@ -30,6 +32,8 @@ app.use(cors({origin:' * ',credentials:true}));
 app.use(morgan('dev')) 
 
 app.use("/api/v1/user",user)
+app.use("/api/v1/course",course)
+
 
 
   app.get('/', (req, res) => {
