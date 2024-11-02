@@ -14,7 +14,7 @@ interface IFavouriteCourse {
   name: string;
   email: string;
   password: string;
-  avatar: {
+  file: {
     public_id: string;
     url: string;
   };
@@ -45,7 +45,7 @@ const schema = new mongoose.Schema<IUser>(
       required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters long"],
     },
-    avatar: {
+    file: {
       public_id: {
         type: String,
         required: true,

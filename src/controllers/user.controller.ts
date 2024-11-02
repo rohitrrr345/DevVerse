@@ -17,11 +17,17 @@ interface AuthenticatedRequest extends Request {
 
 export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewUserRequestBody>, res: Response, next: NextFunction) => {
     const { name, email, password } = req.body;
-    const avatar = req.file as Express.Multer.File | undefined;  
-      if (!name || !email || !password  || !avatar) {
+    console.log( "this",name,email,password);
+    const file = req.file as Express.Multer.File | undefined;  
+    console.log("this",file);
+      if (!name || !email || !password  || !file) {
         return next(new ErrorHandler("Please add all the fields",400));
     }
-  const fileUri = getDataUri(avatar);
+    console.log("this above multer" );
+
+  const fileUri = getDataUri(file);
+  console.log("this below multer" );
+
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
     await User.create({
@@ -141,9 +147,9 @@ if(!user){
   const fileUri = getDataUri(file);
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
-  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  await cloudinary.v2.uploader.destroy(user.file.public_id);
 
-  user.avatar = {
+  user.file = {
     public_id: mycloud.public_id,
     url: mycloud.secure_url,
   };
