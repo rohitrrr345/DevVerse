@@ -2,21 +2,32 @@ import { NextFunction, Request, Response } from "express";
 import {ControllerType} from "../types/UserTypes.js"
 import ErrorHandler from "../utils/errorHandler.js";
 export const errorMiddleware = (
-  err: ErrorHandler,
+  err: Error | ErrorHandler, // Accept both Error and ErrorHandler types
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  err.message ||= "Internal Server Error";
-  err.statusCode ||= 500;
+): Response => {
+  let statusCode = 500; // Default to Internal Server Error
+  let message = "Internal Server Error"; // Default message
 
-  if (err.name === "CastError") err.message = "Invalid ID";
+  // Determine if the error is an instance of ErrorHandler
+  if (err instanceof ErrorHandler) {
+    statusCode = err.statusCode;
+    message = err.message;
+  } else if (err instanceof Error) {
+    // Handle generic Error cases
+    if (err.name === "CastError") {
+      message = "Invalid ID";
+      statusCode = 400; // Bad Request for invalid ID
+    }
+  }
 
-  return res.status(err.statusCode).json({
+  return res.status(statusCode).json({
     success: false,
-    message: err.message,
+    message,
   });
 };
+
 
 export const TryCatch =
   (func: ControllerType) =>
