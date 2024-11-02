@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import user from "./routes/user.js"
 import course from "./routes/course.js"
+import cookieParser from "cookie-parser";
 
 import { connectDB } from './utils/Features.js'
 import cloudinary from 'cloudinary'
@@ -27,6 +28,7 @@ import cloudinary from 'cloudinary'
 
 
  app.use(express.json());
+ app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({origin:' * ',credentials:true}));
 app.use(morgan('dev')) 

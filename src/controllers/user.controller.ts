@@ -30,7 +30,7 @@ export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewU
 
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
-    await User.create({
+     const user=  await User.create({
         name,
         email,
         password,
@@ -40,10 +40,7 @@ export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewU
         }
     });
 
-    res.status(201).json({
-        success: true,
-        message: "User registered successfully"
-    });
+   sendToken(res,user,"Registered Successfully",201);
 });
 export const login:ControllerType = TryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
