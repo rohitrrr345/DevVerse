@@ -9,7 +9,7 @@ const router=express.Router();
 
 //routes
    router.post('/newcourse',isAuthenticated,singleUpload,CreateCourse);
-   router.post('/adddocument',isAuthenticated,singleUpload,addPdfs);
+   router.post('/addocument/:id',isAuthenticated,singleUpload,addPdfs);
 
    router.get('/allCourses',isAuthenticated,getallCourses);
    router.get('/getPdf/:id',isAuthenticated,getPdfDocuments);

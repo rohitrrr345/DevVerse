@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { TryCatch } from "../middlewares/error.js";
 import { ControllerType, courseBody, SearchQuery } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { IUser, User } from "../models/User.js";
-import { sendToken } from "../utils/Features.js";
 import getDataUri from "../utils/getDataUri.js";
 import { Express } from "express"
 
@@ -109,7 +107,7 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
         success: true,
         course,
         message: "Lecture added in Course",
-      });   
+      });
  });
  export const downloadingDocs:ControllerType = TryCatch(async (req:Request, res: Response, next: NextFunction) => {
     const course=await Course.findById(req.params.id);
