@@ -3,8 +3,7 @@ import { TryCatch } from "../middlewares/error.js";
 import { ControllerType, courseBody, SearchQuery } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import getDataUri from "../utils/getDataUri.js";
-import { Express } from "express"
-
+import { io } from "../app.js";
 import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
 
@@ -94,6 +93,7 @@ export const addPdfs:ControllerType = TryCatch(async (req:Request, res: Response
 
      })
      await course.save();
+     io.emit('notification', { message: 'PDF uploaded successfully!' });
      res.status(200).json({
         success: true,
         message: "Lecture added in Course",
