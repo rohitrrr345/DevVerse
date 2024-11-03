@@ -1,15 +1,22 @@
 import './App.css'
+import Hero from './Components/Hero/Hero';
+import Navbar from './Components/Navbar/Navbar'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>Welcome to TsBank</p>
-      <p>This is a React app</p>
-      <p>It is built with TypeScript</p>
-      <p>And styled with Tailwind CSS</p>
-  
-    </div>
+    <Router>
+
+        <Routes>
+          <Route path='/' element={ <Navbar />}/>
+          <Route path='/' element={<Hero/> } />
+
+          
+       
+              
+   
+       </Routes>
+      </Router>
   )
 }
 
