@@ -5,7 +5,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import { TryCatch } from './error.js';
 
 interface AuthenticatedRequest extends Request {
-  user?: IUser; 
+  user?: IUser;
 }
 
 export const isAuthenticated = TryCatch(async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
