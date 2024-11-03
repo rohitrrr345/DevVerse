@@ -1,19 +1,19 @@
 import React from 'react'
+import logo from "./Logo.webp"
 
 const Hero = () => {
   return (
     <main className="hero container">
       <div className="hero-content">
-        <h1>YOUR FEET DESERVE THE BEST</h1>
+        <h1>BUILD LEARN AND GROW WITH DEvVERSE</h1>
         <p>
-          YOUR FEET DESERVE THE BEST AND WE’RE HERE TO HELP YOU WITH OUR
-          SHOES.YOUR FEET DESERVE THE BEST AND WE’RE HERE TO HELP YOU WITH OUR
-          SHOES.
+        DEVVERSE OFFERS A COMPLETELY FREE LIBRARY OF PDFS, LINKS, AND TOOLS LIKE DOC-TO-PDF CONVERTERS, PROVIDING TOP RESOURCES FOR WEB DEVELOPMENT AND COMPUTER APPLICATIONS
         </p>
 
         <div className="hero-btn">
-          <button>Shop Now </button>
-          <button className="secondary-btn">Category</button>
+          <button>Login with Google</button>
+          <button className="secondary-btn">SignUp
+          </button>
         </div>
 
         <div className="shopping">
@@ -26,7 +26,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="hero-image">
-        <img src="/images/hero-image.png" alt="hero-image" />
+        <img src={logo}  alt="hero-image" />
       </div>
     </main>
   )
