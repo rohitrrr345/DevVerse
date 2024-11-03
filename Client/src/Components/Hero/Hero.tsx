@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "./Logo.webp"
+import { FaGoogle } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -11,7 +12,10 @@ const Hero = () => {
         </p>
 
         <div className="hero-btn">
-          <button>Login with Google</button>
+          <button className='flex items-center gap-2'>Login with <FaGoogle style={{
+            color: "white",
+            fontSize: "18px",
+          }} /></button>
           <button className="secondary-btn">SignUp
           </button>
         </div>

@@ -4,7 +4,7 @@ const Navigation = () => {
     return (
       <nav className="container">
         <div className="logo flex items-center">
-          <img src="/images/brand_logo.png" alt="logo" />
+          <img src="/images/brand_logo.png" alt="" />
           <p>DevVerse</p>
         </div>
         <ul>
