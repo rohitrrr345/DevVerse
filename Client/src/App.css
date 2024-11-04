@@ -26,7 +26,7 @@ nav ul {
   list-style: none;
   gap: 24px;
 }
-button {
+button,.rem {
   all: unset;
   padding: 6px 16px;
   background: black;
@@ -46,9 +46,9 @@ button {
   gap: 36px;
 }
 .hero h1 {
-  font-weight: 800;
+  font-weight: 700;
   line-height: 102px;
-  font-size: 108px;
+  font-size: 95px;
 }
 .hero p {
   font-weight: 600;

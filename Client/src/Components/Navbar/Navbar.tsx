@@ -9,8 +9,8 @@ const Navigation = () => {
         </div>
         <ul>
           
-          <Link to="/About">About</Link>
-          <Link to="/Contact">Contact</Link>
+          <Link to="/About" className="rem">About</Link>
+          <Link to="/Contact" className="rem" >Contact</Link>
         </ul>
   
         <button>Login</button>
