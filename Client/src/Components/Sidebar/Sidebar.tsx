@@ -5,6 +5,10 @@ import { HiMenuAlt4 } from 'react-icons/hi';
 import { IoIosPeople } from 'react-icons/io';
 import { RiCoupon3Fill, RiDashboardFill, RiShoppingBag3Fill } from 'react-icons/ri';
 import { Link,  useLocation } from 'react-router-dom'
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { RiAccountCircleFill } from "react-icons/ri";
+import { MdHome } from "react-icons/md";
+
 
 const Sidebar = () => {
     const location = useLocation();
@@ -41,7 +45,7 @@ const Sidebar = () => {
         }:{}
       }
        >
-        <h2>ADMIN PANEL</h2>
+        <h2>DevVerse </h2>
           <DivOne   location={location} />
         <DivTwo location={location} phoneActive={phoneActive}   />
         {phoneActive && <button id='close-sidebar' onClick={()=>setShowmodal(false)}>Close</button>}
@@ -57,8 +61,8 @@ const Sidebar = () => {
       <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li 
           url="/admin/dashboard"
-          text="Dashboard"
-          Icon={RiDashboardFill}
+          text="Home"
+          Icon={MdHome}
           location={location}
         />
        
@@ -73,20 +77,20 @@ const Sidebar = () => {
      <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li
           url="/pages/barcharts"
-          text="Bar"
+          text="Courses"
           Icon={FaChartBar}
           location={location}
         />
         <Li
           url="/pages/piechart"
-          text="Pie"
-          Icon={FaChartPie}
+          text="Profile"
+          Icon={RiAccountCircleFill}
           location={location}
         />
         <Li
           url="/pages/linechart"
-          text="Line"
-          Icon={FaChartLine}
+          text="Notifications"
+          Icon={IoMdNotificationsOutline}
           location={location}
         />
       </ul>
@@ -94,7 +98,7 @@ const Sidebar = () => {
   );
   
   const Li = ({ url, text, location, Icon }) => (
-    <li className=' py-2 px-4 rounded-[10px] '
+    <li className=' py-2 px-1 rounded-[10px] '
       style={{
         backgroundColor: location.pathname.includes(url)
           ? "black"

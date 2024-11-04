@@ -1,124 +1,34 @@
-import Sidebar from "../Sidebar";import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import { useEffect, useState } from "react";
+import { FaSearchengin } from "react-icons/fa6";
+import Sidebar from "../Sidebar/Sidebar";
+import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 const Dashboard = () => {
-  const maxitems = 4;
-  let a;
-  const [cnt, setcnt] = useState([]);
-  const [market, setmarket] = useState([]);
-  const [rings, setrings] = useState({});
+ 
 
-  const [error, seterror] = useState(false);
+ 
 
-  const [currency, setcurrency] = useState("inr");
-  const [item, setitem] = useState("24h");
-  const hour = () => {
-    setitem("24h");
-  };
-  const day = () => {
-    setitem("7d");
-  };
-  const anotherday = () => {
-    setitem("60d");
-  };
+  
 
-  const setInr = () => {
-    setcurrency("inr");
-  };
-  const setUsd = () => {
-    setcurrency("usd");
-  };
-  const setEur = () => {
-    setcurrency("eur");
-  };
-  useEffect(() => {
-    const fetchCoinDatas = async () => {
-      try {
-        a = await axios.get(`${server}/coins/${"bitcoin"}`);
-        setrings(a.data);
-      } catch (error) {
-        seterror(true);
-      }
-    };
-    fetchCoinDatas();
-  }, [item]);
-  useEffect(() => {
-    const fetchCoinData = async () => {
-      try {
-        a = await axios.get(`${server}/coins/${"bitcoin"}`);
-        setrings(a.data);
-
-        // const another=await axios.get(`${server}/coins/${params.id}/market_chart?vs_currency=${currency}&days=${days}`);
-        const { data } = await axios.get(
-          `${server}/coins/${"bitcoin"}/market_chart?vs_currency=${"inr"}&days=${item}`
-        );
-        setmarket(data.prices);
-      } catch (error) {
-        seterror(true);
-      }
-    };
-    fetchCoinData();
-  }, [item]);
-  useEffect(() => {}, [market]);
-
-  useEffect(() => {
-    const fetchCoin = async () => {
-      try {
-        const { data } = await axios.get(
-          `${server}/coins/markets?vs_currency=${currency}&page=${"1"}`
-        );
-        const imp = data.slice(0, maxitems);
-        console.log(cnt)
-        setcnt(imp);
-        console.log(cnt)
-        //  console.log(cnt);
-        // console.log(params.id)
-        // setchartarr(another.data.prices)
-      } catch (error) {
-        seterror(true);
-      }
-    };
-    fetchCoin();
-  }, [currency]);
-  console.log(rings);
   return (
     <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4 ">
       <Sidebar />
       <main className=" dashboard overflow-y-auto">
         <div className=" bar h-16 flex flex-row  justify-[unset] px-4 py-0  ">
           <div className="mr-auto flex justify-center items-center w-full py-4 px-0 gap-2 ">
-            <button
-              className="bg-black w-16 rounded-md p-1  outline-none text-white"
-              onClick={hour}
-            >
-              24h
-            </button>
-            <button
-              className="bg-black w-16 rounded-md p-1  outline-none text-white"
-              onClick={day}
-            >
-              7d
-            </button>
-            <button
-              className="bg-black w-16 rounded-md p-1 outline-none text-white"
-              onClick={anotherday}
-            >
-              60d
-            </button>
+           
+          <input type="text" className="px-2 py-1 w-1/3 rounded-2xl "  id="search" placeholder="Search" />
+            <label htmlFor="search"><FaSearchengin className=""/></label>
+
+
+           
+            
           </div>
         </div>
+        <br />
         <section className="widget-container flex  flex-row justify-between items-stretch gap-8 pt-8 pr-8 pb-8 pl-0 ">
          
         
-           {cnt.map((i) => (
-              <WidgetItem
-              key={i.id}
-              percent={i.current_price}
-              value={i.current_price}
-              heading={i.name}
-              
-   
-             />
-              ))}
+         
         
         </section>
         <section className="graph-container flex flex-row justify-[unset] items-[unset] gap-8 pt-0 pr-[2rem] pb-[2rem] pl-0 ">
@@ -127,14 +37,7 @@ const Dashboard = () => {
              Stastics and Data
             </h2>
             {/* Grapph here */}
-            <BarChart
-              data1={market}
-              title_1="Revenue"
-              title_2="Transaction"
-              bgColor_1="rgb(0,115,255)"
-              bgColor_2="rgba(53,162,235,0.8)"
-              item={item}
-            />
+            
           </div>
 
           <div className="dashboard-categories w-full pb-[2rem] max-w-[16rem] flex flex-col justify-center items-[unset] gap-0 ">
@@ -142,14 +45,7 @@ const Dashboard = () => {
               Coin Market
             </h2>
             <div className="overflow-y-auto pl-1">
-              {cnt.map((i) => (
-                <CategoryItem
-                  key={i.id}
-                  heading={i.name}
-                  value={i.current_price}
-                  color={`hsl(${i.id},${i.current_price}%,50%)`}
-                />
-              ))}
+              
             </div>
           </div>
         </section>
@@ -159,19 +55,14 @@ const Dashboard = () => {
              Coin and exchanges
             </h2>
 
-            <DoughnutChart
-              labels={["Bitcoin", "Others"]}
-              data={[50, 19,11,2]}
-              backgroundColor={["hsl(340,82%,56%)", "rgba(53,162,235,0.8)"]}
-              cutout={90}
-            />
+           
 
             <p className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-              <BiMaleFemale />
+              
             </p>
           </div>
 
-          {/* <Table data={data.transaction} /> */}
+         
         </section>
       </main>
     </div>
