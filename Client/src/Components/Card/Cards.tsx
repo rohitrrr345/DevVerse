@@ -23,9 +23,20 @@ const Cards = ({item}) => {
               {item.description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
+          <CardActions style={
+            {
+              display:"flex",
+              justifyContent:"space-between"
+            }
+          }>
+            <Button   style={{
+              backgroundColor:"black",
+              color:"white"
+            }} size="small">Share</Button>
+            <Button style={{
+              backgroundColor:"black",
+              color:"white"
+            }} size="small">Learn More</Button>
           </CardActions>
         </Card>
      
