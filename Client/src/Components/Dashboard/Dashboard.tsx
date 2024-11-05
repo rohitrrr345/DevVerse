@@ -3,19 +3,41 @@ import { FaSearchengin } from "react-icons/fa6";
 import Sidebar from "../Sidebar/Sidebar";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import Card from "../Card/Card";
 const Dashboard = () => {
  
-
+  const cardData = [
+    {
+      id: 1,
+      title: "Green Iguana",
+      description: "Green iguanas are native to Central and South America and are popular pets.",
+      imageUrl: "/static/images/cards/contemplative-reptile.jpg",
+    },
+    {
+      id: 2,
+      title: "Chameleon",
+      description: "Chameleons are known for their color-changing abilities and unique eyes.",
+      imageUrl: "/static/images/cards/chameleon.jpg",
+    },
+    {
+      id: 3,
+      title: "Komodo Dragon",
+      description: "Komodo dragons are the largest living species of lizard, found in Indonesia.",
+      imageUrl: "/static/images/cards/komodo-dragon.jpg",
+    },
+  ];
+  
  
 
   
 
   return (
+    
     <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4 ">
       <Sidebar />
       <main className=" dashboard overflow-y-auto">
         <div className=" bar h-16 flex flex-row  justify-between w-full  py-0  ">
-          <div className=" flex  items-center   w-4/5    py-2 px-4 gap-2 ">
+          <div className=" flex  items-center      py-2 px-4 gap-2 ">
            
           <input type="text" className="px-5 py-1 w-full rounded-2xl "  id="search" placeholder="Search" />
             <label htmlFor="search"><FaSearchengin className=""/></label>
@@ -24,53 +46,38 @@ const Dashboard = () => {
            
             
           </div>
-          <div className="notifi    w-1/2 ">
-          <div className="w-full">
+          <div className="notifi flex items-center w-20 justify-center   ">
+          <div className="w-full text-2xl ">
           <IoMdNotificationsOutline/>
 
           </div>
           </div>
         </div>
-        <br />
-        <section className="widget-container flex  flex-row justify-between items-stretch gap-8 pt-8 pr-8 pb-8 pl-0 ">
+       
+        <section className="widget-container flex   justify-center items-center  ">
          
+           <div className="flex justify-center w-full  items-center ">
+           <h1 className="text-4xl font-semibold text-center ">Welcome to Devverse</h1>
+
+
+
+
+           </div>
+           <div className="grid grid-cols-3 gap-8 p-2">
+       {
+
+
+cardData.map((item)=>(
+    <Card/>
+))
         
-         
+       }
+           </div>
+                
         
         </section>
-        <section className="graph-container flex flex-row justify-[unset] items-[unset] gap-8 pt-0 pr-[2rem] pb-[2rem] pl-0 ">
-          <div className="revenue-chart w-full px-4 py-12 ">
-            <h2 className="tracking-[3px] font-light uppercase mt-[1rem] mr-0 mb-[2rem] ml-[0.25rem] text-center">
-             Stastics and Data
-            </h2>
-            {/* Grapph here */}
-            
-          </div>
-
-          <div className="dashboard-categories w-full pb-[2rem] max-w-[16rem] flex flex-col justify-center items-[unset] gap-0 ">
-            <h2 className="tracking-[3px] font-light uppercase text-center mt-[1.5rem] mr-0 mb-[2rem] ml-0">
-              Coin Market
-            </h2>
-            <div className="overflow-y-auto pl-1">
-              
-            </div>
-          </div>
-        </section>
-        <section className="transaction-container flex justify-center pt-0 pr-[2rem] pb-[2rem] pl-0 h-[30rem]">
-          <div className="gender-chart w-full max-w-80 p-4 relative">
-            <h2 className="text-center mt-[1.5rem] mr-0 mb-[2rem] ml-0 tracking-[3px] font-light uppercase ">
-             Coin and exchanges
-            </h2>
-
-           
-
-            <p className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-              
-            </p>
-          </div>
-
-         
-        </section>
+       
+       
       </main>
     </div>
   );
