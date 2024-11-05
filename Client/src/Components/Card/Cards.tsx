@@ -11,12 +11,17 @@ const Cards = ({item}) => {
    
         <Card key={item.id} sx={{ maxWidth: 345 }}>
           <CardMedia
-            sx={{ height: 200 }}
+            sx={{ height: 250, width:"100%" }}
             image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHnJDLOcdm_0b6N6kNj-1OvO9KhKYgqIy0w&s"
             title={item.title}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h6"  component="div">
+          <CardContent >
+            <Typography gutterBottom variant="h6" sx={
+              {
+                fontWeight: 'bold' ,
+                fontFamily:"sans-serif"
+              }
+            }  component="div">
               {item.title}
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
