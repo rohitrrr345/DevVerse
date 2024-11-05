@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaSearchengin } from "react-icons/fa6";
 import Sidebar from "../Sidebar/Sidebar";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
+import { IoMdNotificationsOutline } from "react-icons/io";
 const Dashboard = () => {
  
 
@@ -13,15 +14,21 @@ const Dashboard = () => {
     <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4 ">
       <Sidebar />
       <main className=" dashboard overflow-y-auto">
-        <div className=" bar h-16 flex flex-row  justify-[unset] px-4 py-0  ">
-          <div className="mr-auto flex justify-center items-center w-full py-4 px-0 gap-2 ">
+        <div className=" bar h-16 flex flex-row  justify-between w-full  py-0  ">
+          <div className=" flex  items-center   w-4/5    py-2 px-4 gap-2 ">
            
-          <input type="text" className="px-2 py-1 w-1/3 rounded-2xl "  id="search" placeholder="Search" />
+          <input type="text" className="px-5 py-1 w-full rounded-2xl "  id="search" placeholder="Search" />
             <label htmlFor="search"><FaSearchengin className=""/></label>
 
 
            
             
+          </div>
+          <div className="notifi    w-1/2 ">
+          <div className="w-full">
+          <IoMdNotificationsOutline/>
+
+          </div>
           </div>
         </div>
         <br />
