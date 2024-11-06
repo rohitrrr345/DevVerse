@@ -1,6 +1,5 @@
 import "./Card.css";
-import { FaEye } from "react-icons/fa";
-import { CiBookmark } from "react-icons/ci";
+import { MdRemoveRedEye } from "react-icons/md";import { CiBookmark } from "react-icons/ci";
 const Cards = ({ item }) => {
   return (
     <div className="card-container">
@@ -17,8 +16,8 @@ const Cards = ({ item }) => {
           }>{item.title}</h3>
           <p>{item.description}</p>
          <div className="m-2 flex flex-row  justify-between items-center gap-2">
-         <button ><FaEye/>View it  </button>
-         <button > <CiBookmark/> Save </button>
+         <button >View it<MdRemoveRedEye/>  </button>
+         <button >  Save <CiBookmark/> </button>
          </div>
 
         </div>

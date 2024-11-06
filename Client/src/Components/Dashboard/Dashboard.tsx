@@ -159,15 +159,24 @@ const Dashboard = () => {
           </div>
           <div className="notifi flex items-center w-20 justify-center   ">
             <div className="w-full text-2xl ">
-              <IoMdNotificationsOutline />
+              <IoMdNotificationsOutline style={
+                {
+                  fontSize:"25px",
+                  fontWeight:"900",
+                }
+              } />
             </div>
           </div>
         </div>
-
+        <h1 style={
+          {
+            fontSize:"3rem",
+          }
+        }>Hello dev</h1>
         <section className="widget-container flex   justify-center items-center  ">
+                 
 
           <div className="grid grid-cols-3 gap-8 p-2 w-full shadow-lg">
-
             {cardData.map((item) => (
               <Cards item={item} />
             ))}
