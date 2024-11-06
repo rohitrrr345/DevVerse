@@ -166,7 +166,7 @@ const Dashboard = () => {
 
         <section className="widget-container flex   justify-center items-center  ">
 
-          <div className="grid grid-cols-3 gap-8 p-2">
+          <div className="grid grid-cols-3 gap-8 p-2 w-full">
 
             {cardData.map((item) => (
               <Cards item={item} />

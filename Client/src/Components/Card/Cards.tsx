@@ -9,25 +9,13 @@ const Cards = ({item}) => {
 
   return (
    
-        <Card key={item.id} sx={{ maxWidth: 345 }}>
+        <Card key={item.id} sx={{ Width: "300px" }}>
           <CardMedia
-            sx={{ height: 250, width:"100%" }}
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuHnJDLOcdm_0b6N6kNj-1OvO9KhKYgqIy0w&s"
-            title={item.title}
+            sx={{ height: 200, width:"100%" }}
+            image="https://cdn.britannica.com/48/252748-050-C514EFDB/Virat-Kohli-India-celebrates-50th-century-Cricket-November-15-2023.jpg"
+           
           />
-          <CardContent >
-            <Typography gutterBottom variant="h6" sx={
-              {
-                fontWeight: 'bold' ,
-                fontFamily:"sans-serif"
-              }
-            }  component="div">
-              {item.title}
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {item.description}
-            </Typography>
-          </CardContent>
+        
           <CardActions style={
             {
               display:"flex",
@@ -36,11 +24,13 @@ const Cards = ({item}) => {
           }>
             <Button   style={{
               backgroundColor:"black",
-              color:"white"
+              color:"white",
+              fontFamily:"sans-serif"
             }} size="small">Share</Button>
             <Button style={{
               backgroundColor:"black",
-              color:"white"
+              color:"white",
+              fontFamily:"sans-serif"
             }} size="small">Learn More</Button>
           </CardActions>
         </Card>
