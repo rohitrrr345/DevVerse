@@ -146,7 +146,7 @@ const Dashboard = () => {
       <Sidebar />
       <main className=" dashboard overflow-y-auto  shadow-black/20 ">
         <div className=" bar h-16 flex flex-row  justify-between w-full  py-0  ">
-          <div className=" flex  items-center      py-2 px-4 gap-2 ">
+          <div className=" flex  items-center w-4/5     py-2 px-4 gap-2 ">
             <input
               type="text"
               className="px-5 py-1 w-full rounded-2xl "
@@ -154,7 +154,12 @@ const Dashboard = () => {
               placeholder="Search"
             />
             <label htmlFor="search">
-              <FaSearchengin className="" />
+              <FaSearchengin className="" style={
+                {
+                  fontSize:"20px",
+                  fontWeight:"900",
+                }
+              }/>
             </label>
           </div>
           <div className="notifi flex items-center w-20 justify-center   ">
@@ -170,7 +175,8 @@ const Dashboard = () => {
         </div>
         <h1 style={
           {
-            fontSize:"3rem",
+            fontSize:"30px",
+            fontWeight:"bold",
           }
         }>Hello dev</h1>
         <section className="widget-container flex   justify-center items-center  ">
