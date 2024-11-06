@@ -7,7 +7,7 @@ const Dashboard = () => {
   const cardData = [
     {
       id: 1,
-      title: "Green Iguana",
+      title: "TypeScript",
       description:
         "Green iguanas are native to Central and South America and are popular pets.",
       imageUrl: "/static/images/cards/contemplative-reptile.jpg",
@@ -142,9 +142,9 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4 ">
+    <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4  shadow-black/20 ">
       <Sidebar />
-      <main className=" dashboard overflow-y-auto">
+      <main className=" dashboard overflow-y-auto  shadow-black/20 ">
         <div className=" bar h-16 flex flex-row  justify-between w-full  py-0  ">
           <div className=" flex  items-center      py-2 px-4 gap-2 ">
             <input
@@ -166,7 +166,7 @@ const Dashboard = () => {
 
         <section className="widget-container flex   justify-center items-center  ">
 
-          <div className="grid grid-cols-3 gap-8 p-2 w-full">
+          <div className="grid grid-cols-3 gap-8 p-2 w-full shadow-lg">
 
             {cardData.map((item) => (
               <Cards item={item} />

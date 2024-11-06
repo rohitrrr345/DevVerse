@@ -1,40 +1,29 @@
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-
-const Cards = ({item}) => {
-
+import "./Card.css";
+import { FaEye } from "react-icons/fa";
+import { CiBookmark } from "react-icons/ci";
+const Cards = ({ item }) => {
   return (
-   
-        <Card key={item.id} sx={{ Width: "300px" }}>
-          <CardMedia
-            sx={{ height: 200, width:"100%" }}
-            image="https://cdn.britannica.com/48/252748-050-C514EFDB/Virat-Kohli-India-celebrates-50th-century-Cricket-November-15-2023.jpg"
-           
-          />
-        
-          <CardActions style={
+    <div className="card-container">
+      <div className="card">
+        <img
+          src="https://www.hindustantimes.com/static-content/1y/cricket-logos/players/virat-kohli.png"
+          alt=""
+        />
+        <div className="card-content">
+          <h3 style={
             {
-              display:"flex",
-              justifyContent:"space-between"
+              textAlign:"center",
             }
-          }>
-            <Button   style={{
-              backgroundColor:"black",
-              color:"white",
-              fontFamily:"sans-serif"
-            }} size="small">Share</Button>
-            <Button style={{
-              backgroundColor:"black",
-              color:"white",
-              fontFamily:"sans-serif"
-            }} size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-     
+          }>{item.title}</h3>
+          <p>{item.description}</p>
+         <div className="m-2 flex flex-row  justify-between items-center gap-2">
+         <button ><FaEye/>View it  </button>
+         <button > <CiBookmark/> Save </button>
+         </div>
+
+        </div>
+      </div>
+    </div>
   );
 };
 

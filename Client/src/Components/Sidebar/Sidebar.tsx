@@ -45,7 +45,11 @@ const Sidebar = () => {
         }:{}
       }
        >
-        <h2>DevVerse </h2>
+        <h2 style={{
+          fontWeight:"bold",
+          fontSize:"1.5rem",
+          color:"black",
+        }}>DevVerse </h2>
           <DivOne   location={location} />
         <DivTwo location={location} phoneActive={phoneActive}   />
         {phoneActive && <button id='close-sidebar' onClick={()=>setShowmodal(false)}>Close</button>}
@@ -57,7 +61,7 @@ const Sidebar = () => {
 }
   const DivOne = ({ location }) => (
     <div  className='m-[2rem] mx-[1rem]'>
-      <h5 className='m-[1rem] mx-[0rem] opacity-[0.8] tracking-[2px] font-bold uppercase '>Dashboard</h5>
+      <h5 className='m-[1rem] mx-[0rem]  font-bold  '>Dashboard</h5>
       <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li 
           url="/admin/dashboard"
@@ -73,7 +77,7 @@ const Sidebar = () => {
   );
   const DivTwo = ({ location }) => (
     <div  className='m-[2rem] mx-[1rem]'>
-     <h5 className='m-[1rem] mx-[0rem] opacity-[0.8] tracking-[2px] font-bold uppercase'>Charts</h5>
+     <h5 className='m-[1rem] mx-[0rem]   font-bold '>Content</h5>
      <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li
           url="/pages/barcharts"
