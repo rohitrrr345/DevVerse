@@ -151,7 +151,7 @@ const Dashboard = () => {
               type="text"
               className="px-5 py-1 w-full rounded-2xl "
               id="search"
-              placeholder="Search"
+              placeholder="Search any course"
             />
             <label htmlFor="search">
               <FaSearchengin className="" style={

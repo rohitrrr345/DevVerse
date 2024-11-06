@@ -77,3 +77,10 @@ button,.rem {
   display: flex;
   gap: 16px;
 }
+#search::placeholder {
+  text-align: center;
+  color:black; /* Optional: Customize placeholder color */
+}
+#search {
+  border: 2px solid #ccc; /* Optional: Customize the border */
+ } /* Optional: Customize the border */
