@@ -24,8 +24,8 @@ const Hero = () => {
           <p>Also Available On</p>
 
           <div className="brand-icons">
-            <img src="/images/amazon.png" alt="amazon-logo" />
-            <img src="/images/flipkart.png" alt="flipkart-logo" />
+            <img src="/images/amazon.png" alt="Twitter" />
+            <img src="/images/flipkart.png" alt="Facebook" />
           </div>
         </div>
       </div>
