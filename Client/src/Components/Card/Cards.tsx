@@ -20,7 +20,7 @@ const Cards = ({ item }) => {
           </h3>
           <p>{item.description}</p>
           <div className="m-2 flex flex-row  justify-between items-center gap-2">
-            <Link to={`/docsarray`}>
+            <Link to={`/docsarray/`}>
             <button>  View
             <MdRemoveRedEye />{" "}</button>
             </Link>

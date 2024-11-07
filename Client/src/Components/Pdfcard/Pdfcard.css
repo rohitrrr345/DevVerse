@@ -42,15 +42,14 @@
     
     color: black;}
     .card-content button{
-        display: inline-block;
         background-color: black;
-        padding: 3px 15px;
         color: #fff;
         /* text-decoration: none; */
         border-radius: 15px;
         transition: all 0.3s ease;
         font-size: 14px;
         display: flex;
+        width: 80%;
         align-items: center;
         justify-content: center;
         gap: 5px;

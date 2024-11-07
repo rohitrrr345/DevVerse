@@ -140,7 +140,7 @@ export const cardData  = [
       id: 1,
       title: "TypeScript",
       description:
-        "Green iguanas are native to Central and South America and are popular pets.",
+        "TypeScript .",
       imageUrl: "/static/images/cards/contemplative-reptile.jpg",
     },
     {
