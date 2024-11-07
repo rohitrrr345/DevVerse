@@ -79,8 +79,9 @@ button,.rem {
 }
 #search::placeholder {
   text-align: center;
-  color:black; /* Optional: Customize placeholder color */
+  color:rgb(74, 73, 73); /* Optional: Customize placeholder color */
 }
 #search {
-  border: 2px solid #ccc; /* Optional: Customize the border */
+  border: 2px solid #ccc;
+  outline: none; /* Optional: Customize the border */
  } /* Optional: Customize the border */

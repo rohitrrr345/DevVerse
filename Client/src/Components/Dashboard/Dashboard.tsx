@@ -4,7 +4,13 @@ import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Cards from "../Card/Cards";
 const Dashboard = () => {
-  const cardData = [
+  interface WidgetItemProps {
+    heading: string;
+    percent: number;
+    color: string;
+    amount?: number | false;
+  }
+   const cardData  = [
     {
       id: 1,
       title: "TypeScript",
@@ -146,7 +152,7 @@ const Dashboard = () => {
       <Sidebar />
       <main className=" dashboard overflow-y-auto  shadow-black/20 ">
         <div className=" bar h-16 flex flex-row  justify-between w-full  py-0  ">
-          <div className=" flex  items-center w-4/5     py-2 px-4 gap-2 ">
+          <div className=" flex  items-center w-3/5     py-2 px-4 gap-2 ">
             <input
               type="text"
               className="px-5 py-1 w-full rounded-2xl "
@@ -192,7 +198,7 @@ const Dashboard = () => {
     </div>
   );
 };
-const WidgetItem = ({ heading, percent, color, amount = false }) => (
+const WidgetItem:React.FC<WidgetItemProps> = ({ heading, percent, color, amount = false }) => (
   <article className="widget w-[16rem] bg-white shadow-[0_0_10px_rgba(0,0,0,0.132)] p-8 rounded-[10px] flex flex-row justify-between items-stretch gap-0 ">
     <div className="widget-info">
       <p className="opacity-[0.7] text-[0.8rem] ">{heading}</p>
