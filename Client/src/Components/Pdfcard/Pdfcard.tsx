@@ -25,7 +25,7 @@ const Pdfcard = ({ item }) => {
             <button>  Download
             <FaDownload />{" "}</button>
             </Link>
-            <Link className="w-[80%]" to={`/docsarray}`}>
+            <Link className="w-[80%]" to={`/preview`}>
             <button>
             {" "}
             Preview <MdOutlineRemoveRedEye />{" "}

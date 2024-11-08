@@ -49,7 +49,10 @@ const Sidebar = () => {
           fontWeight:"bold",
           fontSize:"1.5rem",
           color:"black",
-        }}>DevVerse </h2>
+          borderBottom:"1px solid black",
+
+          
+        }}>DeVverse </h2>
           <DivOne   location={location} />
         <DivTwo location={location} phoneActive={phoneActive}   />
         {phoneActive && <button id='close-sidebar' onClick={()=>setShowmodal(false)}>Close</button>}
@@ -102,14 +105,14 @@ const Sidebar = () => {
   );
   
   const Li = ({ url, text, location, Icon }) => (
-    <li className=' py-2 px-1 rounded-[10px] '
+    <li className=' py-2  w-[80%] rounded-[15px] '
       style={{
         backgroundColor: location.pathname.includes(url)
           ? "black"
           : " rgb(154, 154, 154)",
       }}
     >
-      <Link className='  flex flex-row justify-center items-center gap-2 text-black'
+      <Link className='  flex  flex-row justify-center items-center gap-2 text-black'
         to={url}
         style={{
           color: location.pathname.includes(url) ? "black" : "white",

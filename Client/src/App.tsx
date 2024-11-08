@@ -4,6 +4,7 @@ import Docs from './Components/Docs/Docs';
 import Hero from './Components/Hero/Hero';
 import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PdfPreview from './Components/Pdfcard/PdfPreview';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Dashboard/> } />
           <Route path="/docsarray" element={<Docs/>} />
+          <Route path="/preview" element={<PdfPreview/>} />
 
           
        
