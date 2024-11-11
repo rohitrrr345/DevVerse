@@ -89,7 +89,7 @@ const Sidebar = () => {
           location={location}
         />
         <Li
-          url="/pages/piechart"
+          url="/profile"
           text="Profile"
           Icon={RiAccountCircleFill}
           location={location}

@@ -9,4 +9,5 @@ const router=express.Router();
    router.post('/register',singleUpload,register);
    router.post('/login',login);
    router.get('/logout',isAuthenticated,logout);
+   
 export default router;
