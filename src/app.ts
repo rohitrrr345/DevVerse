@@ -66,5 +66,5 @@ app.use("/api/v1/course",course)
   });
 
   
-  app.use(errorMiddleware);
+  // app.use(errorMiddleware);
   app.listen(port, () => console.log('Server is working on Port:'+port+' in '+envMode+' Mode.'));

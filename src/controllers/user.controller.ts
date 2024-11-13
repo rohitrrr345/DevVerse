@@ -57,7 +57,41 @@ export const login:ControllerType = TryCatch(async (req: Request, res: Response,
 
   sendToken(res, user, `Welcome back, ${user.name}`, 200);
 });
+  
 
+export const googleLogin:ControllerType=  async (req: Request, res: Response, next: NextFunction) => {
+   const {tokenId}  =req.body;
+   const ticket=await client.verifyIdToken({
+    idToken:tokenId,
+    audience:process.env.GOOGLE_CLIENT_ID,
+
+   });
+   const{name,email,picture,sub:googleId}=ticket.getPayload();
+   let user=awair User.findOne({googleId});
+   if(user){
+    return next(new ErrorHandler("User already exists",409));
+   }   if(!user){
+
+    user=await User.Create({
+      name,
+      email,
+      file:{
+        url:picture,
+      },
+      googleId,
+      authMethod:"google",
+     })
+     sendToken(res,user,"Registered Successfully",201);
+     
+  
+
+   }
+
+
+
+
+
+}
 export const logout:ControllerType = TryCatch(async (req: Request, res: Response, next: NextFunction) => {
   res
     .status(200)

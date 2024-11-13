@@ -19,6 +19,8 @@ interface IFavouriteCourse {
     url: string;
   };
   role: "user" | "admin";
+  googleId:string;
+  authMethod:"local"|"google";
   FavouriteCourse: IFavouriteCourse[];
   createdAt: Date;
   getJWTToken: () => string;
@@ -44,6 +46,18 @@ const schema = new mongoose.Schema<IUser>(
       type: String,
       required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters long"],
+    },
+    googleId:{
+      type:String,
+      unique:true,
+      sparse:true
+
+    },
+    authMethod:{
+     type:String,
+     enum:['local','google'],
+     required:true,
+     default:"local"
     },
     file: {
       public_id: {
