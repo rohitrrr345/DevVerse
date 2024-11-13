@@ -151,8 +151,8 @@ const Dashboard = () => {
     <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4  shadow-black/20 ">
       <Sidebar />
       <main className=" dashboard overflow-y-auto  shadow-black/20 ">
-        <div className=" bar h-16 flex flex-row  justify-between w-full  py-0 ">
-          <div className=" flex  items-center w-3/5   py-2 px-4 gap-2 ">
+        <div className=" bar h-16 flex flex-row  justify-between w-full  py-4 ">
+          <div className=" flex  items-center w-2/5   py-2 px-4 gap-2 ">
             <input
               type="text"
               className="px-5 py-1 w-full rounded-2xl "

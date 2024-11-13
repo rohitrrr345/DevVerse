@@ -7,6 +7,7 @@ import { RiCoupon3Fill, RiDashboardFill, RiShoppingBag3Fill } from 'react-icons/
 import { Link,  useLocation } from 'react-router-dom'
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiAccountCircleFill } from "react-icons/ri";
+import { IoMdContact } from "react-icons/io";
 import { MdHome } from "react-icons/md";
 
 
@@ -82,7 +83,7 @@ const Sidebar = () => {
      <h5 className='m-[1rem] mx-[0rem]   font-bold '>Content</h5>
      <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li
-          url="/pages/barcharts"
+          url="/Courses"
           text="Courses"
           Icon={FaChartBar}
           location={location}
@@ -97,6 +98,13 @@ const Sidebar = () => {
           url="/pages/linechart"
           text="Notifications"
           Icon={IoMdNotificationsOutline}
+          location={location}
+        />
+
+<Li
+          url="/pages/contact"
+          text="Contact Us"
+          Icon={IoMdContact}
           location={location}
         />
       </ul>

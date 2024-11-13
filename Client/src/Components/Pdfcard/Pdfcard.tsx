@@ -8,7 +8,7 @@ const Pdfcard = ({ item }) => {
     <div className="card-containersa">
       <div className="cardsa">
         <img
-        src="https://www.citypng.com/public/uploads/preview/hd-pdf-file-document-black-icon-png-701751695035299dspnijtzoi.png"
+        src="https://icones.pro/wp-content/uploads/2021/03/icone-pdf-noire-symbole-png.png"
           alt=""
         />
         <div className="card-contentsa ">
