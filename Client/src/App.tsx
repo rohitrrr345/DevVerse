@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PdfPreview from './Components/Pdfcard/PdfPreview';
 import Profile from './Components/Profile/Profile';
+import Contact from './Components/Contact/Contact';
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
           <Route path="/docsarray" element={<Docs/>} />
           <Route path="/preview" element={<PdfPreview/>} />
           <Route path="/profile" element={<Profile/>}/>
-
+        <Route path="/contact" element={<Contact/>}/>
           
        
               

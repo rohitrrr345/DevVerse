@@ -102,7 +102,7 @@ const Sidebar = () => {
         />
 
 <Li
-          url="/pages/contact"
+          url="/contact"
           text="Contact Us"
           Icon={IoMdContact}
           location={location}
