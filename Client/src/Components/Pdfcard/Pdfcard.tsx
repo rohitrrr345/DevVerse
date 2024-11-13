@@ -5,13 +5,13 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import "./Pdfcard.css"
 const Pdfcard = ({ item }) => {
   return (
-    <div className="card-container">
-      <div className="card">
+    <div className="card-containersa">
+      <div className="cardsa">
         <img
         src="https://www.citypng.com/public/uploads/preview/hd-pdf-file-document-black-icon-png-701751695035299dspnijtzoi.png"
           alt=""
         />
-        <div className="card-content ">
+        <div className="card-contentsa ">
           <h3
             style={{
               textAlign: "center",

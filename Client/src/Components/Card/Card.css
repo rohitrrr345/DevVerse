@@ -4,14 +4,14 @@
     box-sizing: border-box;
 
 }
-.card-container{
+.card-containers{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 50px;
 }
 
-.card{
+.cards{
    width:350px;
    border-radius: 20px;
    background-color: #f0f0f0;
@@ -21,27 +21,27 @@
    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
-.card:hover {
+.cards:hover {
     transform: scale(1.05);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
  }
-.card img{
+.cards img{
     width: 100%;
     height: 230px;
 }
-.card-content{
+.card-contents{
     padding: 8px;
 }
-.card-content h3{
+.card-contents h3{
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
 }
-.card-content p{
+.card-contents p{
     font-size: 16px;
     
     color: black;}
-    .card-content button{
+    .card-contents button{
         display: inline-block;
         background-color: black;
         padding: 3px 15px;
@@ -56,6 +56,6 @@
         gap: 5px;
 
     }
-    .card-content button svg{
+    .card-contents button svg{
         font-size: 20px;
     }

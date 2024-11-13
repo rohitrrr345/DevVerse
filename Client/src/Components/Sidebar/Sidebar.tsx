@@ -49,10 +49,9 @@ const Sidebar = () => {
           fontWeight:"bold",
           fontSize:"1.5rem",
           color:"black",
-          borderBottom:"1px solid black",
 
           
-        }}>DeVverse </h2>
+        }}>DevVerse </h2>
           <DivOne   location={location} />
         <DivTwo location={location} phoneActive={phoneActive}   />
         {phoneActive && <button id='close-sidebar' onClick={()=>setShowmodal(false)}>Close</button>}

@@ -5,10 +5,13 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { Pdfdata } from "../../Data";
 import Pdfcard from "../Pdfcard/Pdfcard";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-
 import { Link } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import SavedItems from "../SavedCard/SavedItems";
+
+
+
 const Profile = () => {
   return (
     <div className="admin-container grid grid-cols-[1fr_4fr] h-screen bg-[rgba(247,247,247)] gap-4  shadow-black/20 ">
@@ -32,7 +35,7 @@ const Profile = () => {
               />
             </label>
           </div>
-          <div className="notifi flex items-center w-20 justify-center   ">
+          <div className="notifi flex items-center w-20 justify-center ">
             <div className="w-full text-2xl ">
               <IoMdNotificationsOutline
                 style={{
@@ -43,21 +46,22 @@ const Profile = () => {
             </div>
           </div>
         </div>
+     
+        <section className=" flex flex-col   justify-center items-center   ">
         <h3
           style={{
             fontSize: "30px",
             fontWeight: "700",
             color: "#000000",
-            textAlign: "center",
           }}
         >
           My Profile
         </h3>
-        <section className=" flex flex-col   justify-center items-center mx-auto   ">
-          <div className="flex  gap-6 p-10 shadow-xl rounded-xl  ">
+          <div className="flex flex-col  gap-6 p-10 shadow-xl   ">
             
-              <img  className="rounded-[50%] w-40 h-40 border-2 border-black  "
-                src="https://ew.com/thmb/x8cJQbbbOEeblVQzTJwXCR2Ms40=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chris-hemsworth-future-of-thor-061323-01-51e6c2883cd444af8fcab4b3be9c40cd.jpg"
+            <div className="flex gap-2 justify-center ">
+            <img  className="rounded-[50%] w-40 h-40 border-2 border-spacing-1  "
+                src="https://bsmedia.business-standard.com/_media/bs/img/article/2022-09/08/full/1662657385-7641.jpg"
                 alt="Profile pic"
               />
           
@@ -68,7 +72,7 @@ const Profile = () => {
             fontWeight: "700",
             color: "#000",
            
-          }}>Chris Hemsworth</h3>
+          }}>Virat Kohli</h3>
           <p style={{
             fontSize: "15px",
             fontWeight: "600",
@@ -106,15 +110,17 @@ const Profile = () => {
             
           }}>Saved Courses</h1>
                </div>
+         
             </div>
-             
-          </div>
-           
-          <div className="grid grid-cols-3 gap-8 p-2 w-full shadow-lg">
+            </div>
+            <div className="grid grid-cols-3 gap-8 p-2 w-full shadow-lg">
           {Pdfdata.map((item) => (
-            <Pdfcard item={item} />
+            <SavedItems item={item} />
           ))}
         </div>
+          </div>
+           
+      
         </section>
       </main>
     </div>
