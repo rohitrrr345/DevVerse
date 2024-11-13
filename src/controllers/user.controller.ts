@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { TryCatch } from "../middlewares/error.js";
-import { ControllerType, NewUserRequestBody } from "../types/UserTypes.js";
+import { ControllerType, GoogleAuthRequestBody, NewUserRequestBody } from "../types/UserTypes.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { IUser, User } from "../models/User.js";
 import { sendToken } from "../utils/Features.js";
@@ -9,11 +9,13 @@ import { Express } from "express"
 
 import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
+import { OAuth2Client } from "google-auth-library";
 interface AuthenticatedRequest extends Request {
   user?: IUser;
   file?: Express.Multer.File;
 }
 
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://localhost:5000/auth/google/callback');
 
 export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewUserRequestBody>, res: Response, next: NextFunction) => {
     const { name, email, password } = req.body;
@@ -59,18 +61,25 @@ export const login:ControllerType = TryCatch(async (req: Request, res: Response,
 });
   
 
-export const googleLogin:ControllerType=  async (req: Request, res: Response, next: NextFunction) => {
+export const googleLogin:ControllerType=  async (req: Request<{},{},GoogleAuthRequestBody>, res: Response, next: NextFunction) => {
    const {tokenId}  =req.body;
-   const ticket=await client.verifyIdToken({
-    idToken:tokenId,
-    audience:process.env.GOOGLE_CLIENT_ID,
+   const ticket = await client.verifyIdToken({
+    idToken: tokenId,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
 
-   });
-   const{name,email,picture,sub:googleId}=ticket.getPayload();
-   let user=awair User.findOne({googleId});
+
+ const payload=ticket.getPayload();
+ if(!payload){
+   return next(new ErrorHandler("Invalid Token",401));
+ }
+ const {name,email,picture,googleId}=payload;
+   let user=await User.findOne({googleId});
    if(user){
     return next(new ErrorHandler("User already exists",409));
-   }   if(!user){
+   }
+   
+   if(!user){
 
     user=await User.Create({
       name,
@@ -80,9 +89,14 @@ export const googleLogin:ControllerType=  async (req: Request, res: Response, ne
       },
       googleId,
       authMethod:"google",
-     })
+
+
+
+
+
+     })  
      sendToken(res,user,"Registered Successfully",201);
-     
+    }
   
 
    }
