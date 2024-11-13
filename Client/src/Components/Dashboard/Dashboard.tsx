@@ -3,6 +3,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Cards from "../Card/Cards";
+import DarkMode from "../ToggleTheme/Theme";
+import Theme from "../ToggleTheme/Theme";
 const Dashboard = () => {
   interface WidgetItemProps {
     heading: string;
@@ -176,6 +178,8 @@ const Dashboard = () => {
                   fontWeight:"900",
                 }
               } />
+
+              <Theme/>
             </div>
           </div>
         </div>
