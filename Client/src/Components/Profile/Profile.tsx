@@ -57,7 +57,7 @@ const Profile = () => {
         >
           My Profile
         </h3>
-          <div className="flex flex-col  gap-6 p-10 shadow-xl   ">
+          <div className="flex flex-col  gap-6 p-10 shadow-2xl">
             
             <div className="flex gap-2 justify-center ">
             <img  className="rounded-[50%] w-40 h-40 border-2 border-spacing-1  "
