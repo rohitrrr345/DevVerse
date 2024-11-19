@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PdfPreview from './Components/Pdfcard/PdfPreview';
 import Profile from './Components/Profile/Profile';
 import Contact from './Components/Contact/Contact';
+import Notification from './Components/Notifications/Notification';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/preview" element={<PdfPreview/>} />
           <Route path="/profile" element={<Profile/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path='/notifications' element={<Notification/>}/>
           
        
               

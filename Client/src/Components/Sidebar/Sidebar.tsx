@@ -95,7 +95,7 @@ const Sidebar = () => {
           location={location}
         />
         <Li
-          url="/pages/linechart"
+          url="/notifications"
           text="Notifications"
           Icon={IoMdNotificationsOutline}
           location={location}
