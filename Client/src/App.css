@@ -36,6 +36,7 @@ button,.rem {
   font-weight: 500;
 }
 .hero {
+  overflow-y: scroll;
   display: flex;
   align-items: center;
   height: calc(100vh - 72px);

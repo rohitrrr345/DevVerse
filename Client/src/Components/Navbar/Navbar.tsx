@@ -5,12 +5,10 @@ const Navigation = () => {
       <nav className="container">
         <div className="logo flex items-center">
           <img src="/images/brand_logo.png" alt="" />
-          <p>DevVerse</p>
+          <p   className="font-medium  text-2xl ">DevVerse</p>
         </div>
         <ul>
           
-          <Link to="/About" className="rem">About</Link>
-          <Link to="/Contact" className="rem" >Contact</Link>
         </ul>
   
         <button>Login</button>

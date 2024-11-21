@@ -57,7 +57,7 @@ const Notification = () => {
               textAlign:"center",
             
             }}>No Notifications over  there </h1>
-            <p className='text-black'    style={
+            <p className='text-black font-medium'    style={
             {
               fontSize:"20px",
               color:"black",
@@ -66,7 +66,7 @@ const Notification = () => {
             }}>You will have the new notifications when admin upload the pdfs.
               
             </p>
-            <p>We will get u soon!</p>
+            <p className='font-medium'>We will get u soon!</p>
          </div>
        
       </section>
