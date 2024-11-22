@@ -12,15 +12,16 @@ import Notification from './Components/Notifications/Notification';
 const App = () => {
   return (
     <Router>
-       <Navbar/>
         <Routes>
 
-          <Route path='/' element={<Hero/> } />
-          {/* <Route path="/Courses/docsarray/" element={<Docs/>} />
+          <Route path='/home' element={<Hero/> } />
+          <Route path="/courses/" element={<Dashboard/>} />
+
+          <Route path="/Courses/docsarray/" element={<Docs/>} />
           <Route path="/preview" element={<PdfPreview/>} />
           <Route path="/profile" element={<Profile/>}/>
         <Route path="/contact" element={<Contact/>}/>
-        <Route path='/notifications' element={<Notification/>}/> */}
+        <Route path='/notifications' element={<Notification/>}/>
           
        
               

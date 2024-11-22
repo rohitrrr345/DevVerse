@@ -67,7 +67,7 @@ const Sidebar = () => {
       <h5 className='m-[1rem] mx-[0rem]  font-bold  '>Dashboard</h5>
       <ul className=' flex flex-col  justify-[unset] items-[unset]  gap-[0.5rem] list-none' >
         <Li 
-          url="/admin/dashboard"
+          url="/home"
           text="Home"
           Icon={MdHome}
           location={location}
