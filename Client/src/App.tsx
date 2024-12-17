@@ -8,6 +8,8 @@ import PdfPreview from './Components/Pdfcard/PdfPreview';
 import Profile from './Components/Profile/Profile';
 import Contact from './Components/Contact/Contact';
 import Notification from './Components/Notifications/Notification';
+import Login from './Components/SignUp/SignUp';
+import Signin from './Components/Login/Login';
 
 const App = () => {
   return (
@@ -22,6 +24,9 @@ const App = () => {
           <Route path="/profile" element={<Profile/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path='/notifications' element={<Notification/>}/>
+        <Route path='/signup' element={<Login/>}/>
+        <Route path='/login' element={<Signin/>}/>
+
           
        
               

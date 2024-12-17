@@ -9,7 +9,7 @@ import { Express } from "express"
 
 import cloudinary from 'cloudinary'
 import { Course } from "../models/Course.js";
-import { OAuth2Client } from "google-auth-library";
+import { OAuth2Client, TokenPayload } from "google-auth-library";
 interface AuthenticatedRequest extends Request {
   user?: IUser;
   file?: Express.Multer.File;
@@ -73,7 +73,8 @@ export const googleLogin:ControllerType=  async (req: Request<{},{},GoogleAuthRe
  if(!payload){
    return next(new ErrorHandler("Invalid Token",401));
  }
- const {name,email,picture,googleId}=payload;
+ const {name,email,picture}=payload;
+ const googleId:TokenPayload=payload
    let user=await User.findOne({googleId});
    if(user){
     return next(new ErrorHandler("User already exists",409));
@@ -81,14 +82,14 @@ export const googleLogin:ControllerType=  async (req: Request<{},{},GoogleAuthRe
    
    if(!user){
 
-    user=await User.Create({
+    user=await User.create({
       name,
       email,
       file:{
         url:picture,
       },
       googleId,
-      authMethod:"google",
+      authMethod:"google",//matrices is the 
 
 
 
@@ -105,7 +106,7 @@ export const googleLogin:ControllerType=  async (req: Request<{},{},GoogleAuthRe
 
 
 
-}
+
 export const logout:ControllerType = TryCatch(async (req: Request, res: Response, next: NextFunction) => {
   res
     .status(200)

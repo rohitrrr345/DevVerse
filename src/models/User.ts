@@ -15,7 +15,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   file: {
-    public_id: string;
+    public_id: string;//internal structure defines all route 
     url: string;
   };
   role: "user" | "admin";
