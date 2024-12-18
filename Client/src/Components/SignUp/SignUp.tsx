@@ -1,6 +1,5 @@
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../Actions/user';
 import { useState } from "react";
 import { IUser } from "../../types/user";
 import { AppDispatch } from "../../store";
@@ -22,7 +21,6 @@ const Login = () => {
             password: password,
           };
         // Step 2: Include username in the dispatched action
-        dispatch(registerUser(userData));   
         
       };
 

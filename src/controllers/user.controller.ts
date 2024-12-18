@@ -20,28 +20,36 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE
 export const register:ControllerType = TryCatch(async (req: Request<{}, {}, NewUserRequestBody>, res: Response, next: NextFunction) => {
     const { name, email, password } = req.body;
     console.log( "this",name,email,password);
+    let user;
     const file = req.file as Express.Multer.File | undefined;  
     console.log("this",file);
       if (!name || !email || !password  || !file) {
         return next(new ErrorHandler("Please add all the fields",400));
     }
     console.log("this above multer" );
-
-  const fileUri = getDataUri(file);
+ user=await User.findOne({email });
+ if (user) {
+  return next(new ErrorHandler("User already exists",409));
+}
+const fileUri = getDataUri(file);
   console.log("this below multer" );
 
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
-
-     const user=  await User.create({
+console.log("this was main thing to me");
+// console.log(mycloud)
+      user=  await User.create({
         name,
         email,
         password,
         file:{
             public_id:mycloud.public_id,
             url:mycloud.secure_url,
-        }
-    });
+        },
+        authMethod:"local",
+        
 
+    });
+console.log("there")
    sendToken(res,user,"Registered Successfully",201);
 });
 export const login:ControllerType = TryCatch(async (req: Request, res: Response, next: NextFunction) => {
