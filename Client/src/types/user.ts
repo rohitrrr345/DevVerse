@@ -3,3 +3,8 @@ export interface IUser {
   email: string;
   password: string;
 }
+
+export interface MessageResponse {
+  success: boolean;
+  message: string;
+}

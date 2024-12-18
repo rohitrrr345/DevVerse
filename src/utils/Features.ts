@@ -16,8 +16,7 @@ export const sendToken = (res: Response, user: User, message: string, statusCode
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
-    message,
-    user,
+    message:message
   });
 };
 export const connectDB = (uri: string) => {

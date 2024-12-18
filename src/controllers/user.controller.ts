@@ -46,7 +46,7 @@ console.log("this was main thing to me");
             url:mycloud.secure_url,
         },
         authMethod:"local",
-        
+
 
     });
 console.log("there")
@@ -65,7 +65,7 @@ export const login:ControllerType = TryCatch(async (req: Request, res: Response,
   const isMatch = await user.comparePassword(password);
   if (!isMatch) return next(new ErrorHandler( "Invalid credentials",401));
 
-  sendToken(res, user, `Welcome back, ${user.name}`, 200);
+  sendToken(res, user, `Welcome back`, 200);
 });
   
 

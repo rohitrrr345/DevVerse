@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import axios from "axios";
+import { IUser, MessageResponse } from "../types/user";
 
 
 export const userAPI = createApi({
@@ -9,9 +9,9 @@ export const userAPI = createApi({
     }),
     tagTypes: ["users"],
     endpoints: (builder) => ({
-        login: builder.mutation<MessageResponse, User>({
+        login: builder.mutation<MessageResponse, IUser>({
             query: (user) => ({
-              url: "new",
+              url: "register",
               method: "POST",
               body: user,
             }),
